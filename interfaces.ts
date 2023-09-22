@@ -33,31 +33,27 @@ interface HouseWithID {
 }
 
 function findHouses(houses: string): HouseWithID[];
-
 function findHouses(
     houses: string,
     filter: (house: House) => boolean
 ): HouseWithID[];
-
 function findHouses(houses: House[]): HouseWithID[];
-
 function findHouses(
     houses: House[],
     filter: (house: House) => boolean
 ): HouseWithID[];
 
+function findHouses(arg1: string | House[]): HouseWithID[] {
+    if (typeof arg1 === "string") {
+        const parsedHouses = JSON.parse(arg1)
+        const housesWithID = parsedHouses.map((house: House): HouseWithID => ({
+            ...house,
+            id: uuidv4()
+        }))
 
-function findHouses(
-    arg1: string | House[],
-    arg2?: (house: House) => boolean
-): HouseWithID[] {
-    let parsedHouses: House[]
-    // parse if json string
-    typeof arg1 === "string" ? parsedHouses = JSON.parse(arg1) : parsedHouses = arg1
-    // only return house with matching name
-    arg2 ? parsedHouses = parsedHouses.filter(house => arg2(house)) : null
-
-    const housesWithID = parsedHouses.map(house => ({
+        return housesWithID
+    }
+    const housesWithID = arg1.map((house: House): HouseWithID => ({
         ...house,
         id: uuidv4()
     }))
@@ -65,10 +61,8 @@ function findHouses(
     return housesWithID
 }
 
-console.log(1, findHouses(JSON.stringify(houses)))
+console.log(findHouses(JSON.stringify(houses)))
 
-console.log(2, findHouses(JSON.stringify(houses), ({ name }) => name === "Corrino"))
+console.log(findHouses(JSON.stringify(houses), ({ name }) => name === "Atreides"))
 
-console.log(3, findHouses(houses))
-
-console.log(4, findHouses(houses, ({ name }) => name === "Harkonnen"))
+console.log(findHouses(houses))
