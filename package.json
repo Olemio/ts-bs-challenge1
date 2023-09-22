@@ -1,0 +1,14 @@
+{
+  "name": "challenge-1-find-houses",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "devDependencies": {
+    "ts-node": "^10.9.1",
+    "typescript": "^5.2.2"
+  },
+  "dependencies": {
+    "uuid": "^9.0.1",
+    "uuidv4": "^6.2.13"
+  }
+}
