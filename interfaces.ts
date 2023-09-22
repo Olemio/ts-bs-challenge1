@@ -33,19 +33,15 @@ interface HouseWithID {
 }
 
 function findHouses(houses: string): HouseWithID[];
-
 function findHouses(
     houses: string,
     filter: (house: House) => boolean
 ): HouseWithID[];
-
 function findHouses(houses: House[]): HouseWithID[];
-
 function findHouses(
     houses: House[],
     filter: (house: House) => boolean
 ): HouseWithID[];
-
 
 function findHouses(
     arg1: string | House[],
@@ -54,7 +50,6 @@ function findHouses(
     let parsedHouses: House[]
 
     typeof arg1 === "string" ? parsedHouses = JSON.parse(arg1) : parsedHouses = arg1
-    
     arg2 ? parsedHouses = parsedHouses.filter(house => arg2(house)) : null
 
     const housesWithID = parsedHouses.map(house => ({
@@ -66,9 +61,6 @@ function findHouses(
 }
 
 console.log(1, findHouses(JSON.stringify(houses)))
-
 console.log(2, findHouses(JSON.stringify(houses), ({ name }) => name === "Corrino"))
-
 console.log(3, findHouses(houses))
-
 console.log(4, findHouses(houses, ({ name }) => name === "Harkonnen"))
